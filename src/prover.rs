@@ -50,19 +50,23 @@ impl Prover {
         let mut thread_pools: Vec<Arc<ThreadPool>> = Vec::new();
         let pool_count;
         let pool_threads;
-        if threads % 12 == 0 {
-            pool_count = threads / 12;
-            pool_threads = 12;
-        } else if threads % 10 == 0 {
-            pool_count = threads / 10;
-            pool_threads = 10;
-        } else if threads % 8 == 0 {
-            pool_count = threads / 8;
-            pool_threads = 8;
-        } else {
-            pool_count = threads / 6;
-            pool_threads = 6;
-        }
+        // if threads % 12 == 0 {
+        //     pool_count = threads / 12;
+        //     pool_threads = 12;
+        // } else if threads % 10 == 0 {
+        //     pool_count = threads / 10;
+        //     pool_threads = 10;
+        // } else if threads % 8 == 0 {
+        //     pool_count = threads / 8;
+        //     pool_threads = 8;
+        // } else {
+        //     pool_count = threads / 6;
+        //     pool_threads = 6;
+        // }
+
+        pool_threads = threads;
+        pool_count = threads / 6 + 1;
+
         if cuda.is_none() {
             for index in 0..pool_count {
                 let pool = ThreadPoolBuilder::new()
@@ -110,6 +114,7 @@ impl Prover {
             while let Some(msg) = receiver.recv().await {
                 match msg {
                     ProverEvent::NewWork(difficulty, block_template) => {
+                        debug!("mine once {}", block_template.to_string());
                         p.new_work(
                             difficulty,
                             block_template.block_height(),

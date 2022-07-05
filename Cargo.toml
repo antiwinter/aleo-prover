@@ -7,10 +7,10 @@ license = "GPL-3.0-or-later"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-#snarkvm = { path = "../../src/snarkVM" }
-#snarkvm-algorithms = { path = "../../src/snarkVM/algorithms" }
-snarkvm = { git = "https://github.com/HarukaMa/snarkVM.git", branch = "gpu-index" }
-snarkvm-algorithms = { git = "https://github.com/HarukaMa/snarkVM.git", branch = "gpu-index" }
+snarkvm = { path = "../hkmVM" }
+snarkvm-algorithms = { path = "../hkmVM/algorithms" }
+#snarkvm = { git = "https://github.com/HarukaMa/snarkVM.git", branch = "gpu-index" }
+#snarkvm-algorithms = { git = "https://github.com/HarukaMa/snarkVM.git", branch = "gpu-index" }
 rand = "0.8.5"
 num_cpus = "1.13.1"
 structopt = "0.3.26"
